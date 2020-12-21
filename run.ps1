@@ -3,4 +3,4 @@ docker run --rm --interactive --tty `
     --workdir "/work" `
     ghdl/vunit:gcc `
     "sh" `
-    "/work/scripts/$args.sh"
+    "/work/scripts/sh/$args.sh"
