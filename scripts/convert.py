@@ -4,8 +4,8 @@ from errno import EEXIST
 from os import makedirs, replace
 from sys import argv
 
+external = glob('./external/**/src/**/*.vhd', recursive=True)
 src = glob('./src/**/*.vhd', recursive=True)
-external = glob('./external/*/src/**/*.vhd', recursive=True)
 primary = argv[1]
 
 try:
@@ -19,11 +19,11 @@ options = [
     '--workdir=ghdl_out'
 ]
 
-run(['ghdl', '-i'] + options + src + external)
+run(['ghdl', '-i'] + options + external + src)
 run(['ghdl', '-m'] + options + [primary])
 
 with open(f'./ghdl_out/{primary}.vhd', 'w') as output_file:
-    output_file.write(run(['ghdl', '--synth', '--vendor-library=altera'] + options + [primary], capture_output=True).stdout.decode('utf-8'))
+    output_file.write(run(['ghdl', '--synth'] + options + [primary], capture_output=True).stdout.decode('utf-8'))
 
 replace(primary, f'./ghdl_out/{primary}')
 replace(f'e~{primary}.o', f'./ghdl_out/e~{primary}.o')
