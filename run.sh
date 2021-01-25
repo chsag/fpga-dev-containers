@@ -6,6 +6,7 @@ arguments=$@
 
 docker run --rm --interactive --tty \
     --volume "${PWD}:/work" \
+    --volume "${QUARTUS_ROOTDIR}:/quartus" \
     --workdir "/work" \
     ghdl/vunit:gcc \
     "python3" \
