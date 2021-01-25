@@ -27,7 +27,7 @@ if __name__ == '__main__':
         iglob('./external/**/src/**/*.vhd', recursive=True)
     ):
         try:
-            test_lib.get_source_files(f'*{Path(f).stem}.vhd')
+            test_lib.get_source_files(f'*/{Path(f).stem}.vhd')
         except:
             test_lib.add_source_file(f)
             print(f)
