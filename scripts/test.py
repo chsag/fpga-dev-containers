@@ -21,17 +21,10 @@ if __name__ == '__main__':
 
     test_lib = test_environment.add_library('test')
 
-    for f in chain(
-        iglob('./test/**/*.vhd', recursive=True),
-        iglob('./src/**/*.vhd', recursive=True),
-        iglob('./external/**/src/**/*.vhd', recursive=True)
-    ):
-        try:
-            test_lib.get_source_files(f'*/{Path(f).stem}.vhd')
-        except:
-            test_lib.add_source_file(f)
-
     for test in tests:
+        if hasattr(test, 'add_source_files'):
+            test.add_source_files(test_lib)
+
         if hasattr(test, 'add_configs'):
             test.add_configs(test_lib)
 
