@@ -8,5 +8,6 @@ docker run --rm --interactive --tty \
     --volume "${PWD}:/work" \
     --workdir "/work" \
     chsag/vhdl-scripts \
-    "/work/scripts/scripts/$script" \
+    python3 \
+    "/work/scripts/scripts/$script.py" \
     $arguments
