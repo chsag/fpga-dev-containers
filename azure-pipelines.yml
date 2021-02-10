@@ -7,7 +7,7 @@ pool:
 steps:
 - task: mirror-git-repository-vsts-task@1
   inputs:
-    sourceGitRepositoryUri: '$(Build.Repository.Uri)'
+    sourceGitRepositoryUri: 'https://dev.azure.com/Soudronic-VHDL/_git/scripts'
     sourceGitRepositoryPersonalAccessToken: '$(DEVOPS_TOKEN)'
     destinationGitRepositoryUri: 'https://github.com/chsag/vhdl-scripts'
     destinationGitRepositoryPersonalAccessToken: '$(GITHUB_TOKEN)'
