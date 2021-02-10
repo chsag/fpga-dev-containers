@@ -1,0 +1,19 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '20.10.3'
+  
+  - script: docker build . --tag chsag/vhdl-scripts
+    displayName: 'Build docker image'
+
+  - script: echo "$(DOCKER_HUB_TOKEN)" | docker login --username $(DOCKER_HUB_USER) --password-stdin
+    displayName: 'Login to Docker Hub'
+
+  - script: docker push chsag/vhdl-scripts
+    displayName: 'Push image to Docker Hub'
