@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from glob import glob
 from subprocess import run
 from errno import EEXIST
