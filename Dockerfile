@@ -10,7 +10,9 @@ RUN mkdir /tmp/quartus && \
     cd /tmp/quartus && \
     curl -L -o quartus.run https://download.altera.com/akdlm/software/acdsinst/20.1std.1/720/ib_installers/QuartusLiteSetup-20.1.1.720-linux.run && \
     chmod +x ./quartus.run && \
-    ./quartus.run --mode unattended --installdir /opt/intelFPGA_lite/20.1 --disable-components quartus_help,modelsim_ase,modelsim_ae --accept_eula 1
+    ./quartus.run --mode unattended --installdir /opt/intelFPGA_lite/20.1 --disable-components quartus_help,modelsim_ase,modelsim_ae --accept_eula 1 && \
+    rm -rf /opt/intelFPGA_lite/nios2eds && \
+    rm -rf /opt/intelFPGA_lite/ip
 
 FROM ghdl/vunit:gcc
 
