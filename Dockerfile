@@ -4,7 +4,7 @@ RUN echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jes
     echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list && \
     sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list && \
     echo "Acquire::Check-Valid-Until \"false\";" > /etc/apt/apt.conf.d/100disablechecks && \
-    apt-get update && apt-get -y install curl libtcmalloc-minimal4 libglib2.0-0
+    apt-get update && apt-get -y install curl libtcmalloc-minimal4
 
 RUN mkdir /tmp/quartus && \
     cd /tmp/quartus && \
@@ -16,7 +16,7 @@ RUN mkdir /tmp/quartus && \
 
 FROM ghdl/vunit:gcc
 
-RUN apt-get update && apt-get -y install locales
+RUN apt-get update && apt-get -y install locales libglib2.0-0
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
@@ -25,4 +25,5 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 COPY --from=quartus /opt/intelFPGA_lite/20.1 /opt/intelFPGA_lite/20.1
 COPY --from=quartus /usr/lib/libtcmalloc_minimal.so.4 /usr/lib/libtcmalloc_minimal.so.4
 
+ENV LC_ALL=en_US.UTF-8
 ENV LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4
