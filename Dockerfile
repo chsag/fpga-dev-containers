@@ -25,5 +25,4 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 COPY --from=quartus /opt/intelFPGA_lite/20.1 /opt/intelFPGA_lite/20.1
 COPY --from=quartus /usr/lib/libtcmalloc_minimal.so.4 /usr/lib/libtcmalloc_minimal.so.4
 
-ENV LC_ALL=en_US.UTF-8
 ENV LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4
