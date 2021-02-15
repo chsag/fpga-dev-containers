@@ -27,4 +27,3 @@ COPY --from=quartus /usr/lib/libtcmalloc_minimal.so.4 /usr/lib/libtcmalloc_minim
 
 ENV LC_ALL="en_US.UTF-8"
 ENV LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4
-ENTRYPOINT [ "export", "PATH=$PATH:/opt/intelFPGA_lite/20.1/quartus/bin" ]
