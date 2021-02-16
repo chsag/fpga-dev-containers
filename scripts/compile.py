@@ -7,4 +7,4 @@ run([
     '--flow',
     'compile',
     glob('/work/*.qpf')[0]
-])
+], check=True)
