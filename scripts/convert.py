@@ -1,25 +1,18 @@
 #!/usr/bin/python3
 from glob import glob
-from subprocess import run
+from subprocess import CalledProcessError, run, PIPE
 from errno import EEXIST
 from os import makedirs, replace
-from os.path import exists
-from sys import argv
-from itertools import chain
-from glob import iglob
 from pathlib import Path
+from re import findall
 
-primary = argv[1]
+project_path = Path(glob('/work/*.qpf')[0])
+settings_path = project_path.with_suffix('.qsf')
+primary = project_path.stem
 
-src = []
-for src_file in chain(
-    iglob('./src/**/*.vhd', recursive=True),
-    iglob('./external/**/src/**/*.vhd', recursive=True)
-):
-    try:
-        next(f for f in src if Path(f).stem == Path(src_file).stem)
-    except StopIteration:
-        src.append(src_file)
+src = None
+with open(settings_path) as settings_file:
+    src = findall(r'set_global_assignment -name VHDL_FILE "?(.*\.vhd)"?', settings_file.read())
 
 try:
     makedirs('ghdl_out')
@@ -30,25 +23,23 @@ except OSError as e:
 options = [
     '--std=08',
     '--workdir=ghdl_out',
-    '-Paltera',
     '-fsynopsys'
 ]
 
-if not exists('./altera'):
-    run([
-        '/usr/local/lib/ghdl/vendors/compile-altera.sh',
-        '--source', '/quartus/eda/sim_lib',
-        '--vhdl2008',
-        '--altera'
-    ], check=True)
-
-run(['ghdl', '-i'] + options + src, check=True)
-run(['ghdl', '-m'] + options + [primary], check=True)
+try:
+    run(['ghdl', '-i', '-P/usr/local/lib/ghdl/vendors/intel'] + options + src, stdout=PIPE, stderr=PIPE, check=True)
+    run(['ghdl', '-m', '-P/usr/local/lib/ghdl/vendors/intel'] + options + [primary], stdout=PIPE, stderr=PIPE, check=True)
+except CalledProcessError as e:
+    print(e.stderr.decode('utf-8'))
+    exit(e.returncode)
 
 with open(f'./ghdl_out/{primary}.vhd', 'w') as output_file:
-    p = run(['ghdl', '--synth'] + options + [primary], capture_output=True)
-    output_file.write(p.stdout.decode('utf-8'))
-    print(p.stderr.decode('utf-8'))
+    try:
+        p = run(['ghdl', '--synth', '--vendor-library=altera_mf'] + options + [primary], stdout=PIPE, stderr=PIPE, check=True)
+        output_file.write(p.stdout.decode('utf-8'))
+    except CalledProcessError as e:
+        print(e.stderr.decode('utf-8'))
+        exit(e.returncode)
 
 replace(primary, f'./ghdl_out/{primary}')
 replace(f'e~{primary}.o', f'./ghdl_out/e~{primary}.o')
