@@ -6,11 +6,16 @@ from os.path import exists
 from shutil import copyfile
 from pathlib import Path
 from re import search
+from sys import argv
 
 project_path = Path(glob('/work/*.qpf')[0])
 settings_path = project_path.with_suffix('.qsf')
 
-ref = getenv('BUILD_SOURCE_BRANCH', '')
+try:
+    ref = argv[1]
+except IndexError:
+    ref = ''
+
 print(f'Building {ref}...')
 
 makedirs('build')
