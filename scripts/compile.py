@@ -10,12 +10,14 @@ from re import search
 project_path = Path(glob('/work/*.qpf')[0])
 settings_path = project_path.with_suffix('.qsf')
 
-ref = getenv('Build.SourceBranch', '')
+ref = getenv('BUILD_SOURCE_BRANCH', '')
+print(f'Building {ref}...')
 
 makedirs('build')
 
 try:
     version_major, version_minor, version_revision, version_rc = search(r'v(\d+)\.(\d+)\.(\d+)_rc(\d+)', ref).groups()
+    print(f'Version {version_major}.{version_minor}.{version_revision}')
 
     copyfile(settings_path, settings_path.with_suffix('.tmp'))
 
