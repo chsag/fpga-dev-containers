@@ -7,7 +7,7 @@ arguments=$@
 docker run --rm --tty \
     --volume "${PWD}:/work" \
     --workdir "/work" \
-    chsag/vhdl-scripts:0.1 \
+    chsag/vhdl-scripts:0.2 \
     python3 \
     "/work/scripts/scripts/$script.py" \
     $arguments
