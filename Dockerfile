@@ -62,8 +62,8 @@ RUN mkdir /tmp/quartus \
         --installdir /opt/intelFPGA_lite/${QUARTUS_VERSION} \
         --disable-components quartus_help,modelsim_ase,modelsim_ae \
         --accept_eula 1 \
-    && rm -rf /opt/intelFPGA_lite/{QUARTUS_VERSION}/nios2eds \
-    && rm -rf /opt/intelFPGA_lite/{QUARTUS_VERSION}/ip \
+    && rm -rf /opt/intelFPGA_lite/${QUARTUS_VERSION}/nios2eds \
+    && rm -rf /opt/intelFPGA_lite/${QUARTUS_VERSION}/ip \
     && rm -rf /tmp/quartus
 
 # Work around (https://community.intel.com/t5/Intel-Quartus-Prime-Software/Quartus-failed-to-run-inside-Docker-Linux/m-p/241059/highlight/true#M54719)
