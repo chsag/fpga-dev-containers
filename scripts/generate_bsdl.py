@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 from subprocess import run
-from os import chdir, unlink
+from os import chdir, unlink, rename
 from shutil import copy
 from glob import glob
+from pathlib import Path
 
-device_bsdl = copy(glob('*.bsd')[0], '/work/output_files/')
+project_path = Path(glob('/work/*.qpf')[0])
+primary = project_path.stem
+
+device_bsdl_path = Path(copy(glob('/work/*.bsd')[0], '/work/output_files/'))
 chdir('/work/output_files')
 
 run([
@@ -13,4 +17,5 @@ run([
     '/opt/bsdl_generator/bsdl_generator.tcl'
 ], check=True)
 
-unlink(device_bsdl)
+unlink(device_bsdl_path)
+rename(device_bsdl_path.with_name(f'post{device_bsdl_path.name}'), device_bsdl_path.with_name(f'{primary}.bsd'))
