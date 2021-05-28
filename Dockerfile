@@ -88,4 +88,45 @@ RUN /usr/local/lib/ghdl/vendors/compile-intel.sh \
         --source /opt/intelFPGA_lite/${QUARTUS_VERSION}/quartus/eda/sim_lib \
         --output /usr/local/lib/ghdl/vendors/intel
 
+# Install BSDL File Generation Tools
+RUN mkdir /tmp/bsdl_generator \
+    && cd /tmp/bsdl_generator \
+    && mkdir /opt/bsdl_generator \
+    && case ${QUARTUS_DEVICE} in \
+        maxv) \
+            curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/MAXV/max_v_postbsdl_v1.zip \
+            && unzip max_v_postbsdl_v1.zip \
+            && mv max_v_postbsdl_v1.tcl /opt/bsdl_generator/bsdl_generator.tcl \
+        ;; \
+        stratix10) \
+            curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/postconfig_s10.zip \
+            && unzip postconfig_s10.zip \
+            && mv postconfig_s10.tcl /opt/bsdl_generator/bsdl_generator.tcl \
+        ;; \
+        # arria10) \
+            # curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/Post-Configuration_BSDL.zip \
+            # && unzip Post-Configuration_BSDL.zip \
+            # ???
+        # ;; \
+        max10) \
+            curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/postconfig.zip \
+            && unzip postconfig.zip \
+            && mv postconfig.tcl /opt/bsdl_generator/bsdl_generator.tcl \
+        ;; \
+        cyclone10*) \
+            curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/C10/C10_postconfig.zip \
+            && unzip C10_postconfig.zip \
+            && mv C10.tcl /opt/bsdl_generator/bsdl_generator.tcl \
+        ;; \
+        agilex) \
+            curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/agilex_post_config/Post_config_AGILEX.zip \
+            && unzip Post_config_AGILEX.zip \
+        ;; \
+        *) \
+            echo "Warning: BSDL generation for ${QUARTUS_DEVICE} is not supported by this Dockerfile " \
+        ;; \
+    esac \
+    && chmod +x /opt/bsdl_generator/bsdl_generator.tcl \
+    && rm -rf /tmp/bsdl_generator
+
 ENV PATH=$PATH:/opt/intelFPGA_lite/${QUARTUS_VERSION}/quartus/bin
