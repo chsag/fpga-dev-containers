@@ -10,7 +10,6 @@ on:
 env:
   FPGA: cyclone10lp
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/${{ FPGA }}-dev-container
 
 jobs:
   docker:
@@ -23,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ FPGA }}-dev-container
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
