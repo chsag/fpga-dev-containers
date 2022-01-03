@@ -10,7 +10,7 @@ on:
 env:
   FPGA: cyclone10lp
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/${{ env.FPGA }}-dev-container
+  IMAGE_NAME: ${{ github.repository_owner }}/${{ FPGA }}-dev-container
 
 jobs:
   docker:
