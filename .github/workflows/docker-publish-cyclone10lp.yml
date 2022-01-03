@@ -8,8 +8,9 @@ on:
     tags: [ 'v*.*.*' ]
 
 env:
+  FPGA: cyclone10lp
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/cyclone10lp-dev-container
+  IMAGE_NAME: ${{ github.repository_owner }}/${{ env.FPGA }}-dev-container
 
 jobs:
   docker:
@@ -39,6 +40,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ${{ env.FPGA }}.dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
