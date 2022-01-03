@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ FPGA }}-dev-container
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.FPGA }}-dev-container
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
