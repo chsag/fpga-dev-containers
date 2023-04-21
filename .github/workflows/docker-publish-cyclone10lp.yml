@@ -8,11 +8,14 @@ on:
     tags: [ 'v*.*.*' ]
 
 env:
-  FPGA: cyclone10lp
   REGISTRY: ghcr.io
 
 jobs:
   docker:
+    strategy:
+      matrix:
+        fpga: [ cyclone10lp, max ]
+  
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
