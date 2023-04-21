@@ -56,7 +56,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-args: "REPOSITORY=${{ github.repository_owner }},GHDL_VERSION=${{ env.GHDL_VERSION }}"
+          build-args: |
+            REPOSITORY=${{ github.repository_owner }}
+            GHDL_VERSION=${{ env.GHDL_VERSION }}
           file: ghdl.dockerfile
           push: true
           tags: "${{ env.REGISTRY }}/${{ github.repository_owner }}/ghdl:latest,${{ env.REGISTRY }}/${{ github.repository_owner }}/ghdl:${{ env.GHDL_VERSION }}"
@@ -79,7 +81,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-args: "REPOSITORY=${{ github.repository_owner }},VUNIT_VERSION=${{ env.VUNIT_VERSION }}"
+          build-args: |
+            REPOSITORY=${{ github.repository_owner }}
+            VUNIT_VERSION=${{ env.VUNIT_VERSION }}
           file: vunit.dockerfile
           push: true
           tags: "${{ env.REGISTRY }}/${{ github.repository_owner }}vunit:latest,${{ env.REGISTRY }}/${{ github.repository_owner }}/vunit:${{ env.VUNIT_VERSION }}"
@@ -102,7 +106,11 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./intel
-          build-args: "REPOSITORY=${{ github.repository_owner }},QUARTUS_VERSION=${{ env.QUARTUS_VERSION }},QUARTUS_PATCH=${{ env.QUARTUS_PATCH }},QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}"
+          build-args: |
+            REPOSITORY=${{ github.repository_owner }}
+            QUARTUS_VERSION=${{ env.QUARTUS_VERSION }}
+            QUARTUS_PATCH=${{ env.QUARTUS_PATCH }}
+            QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}
           file: quartus.dockerfile
           push: true
           tags: "${{ env.REGISTRY }}/${{ github.repository_owner }}/quartus:latest,${{ env.REGISTRY }}/${{ github.repository_owner }}/quartus:${{ env.QUARTUS_VERSION }}"
@@ -140,7 +148,11 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          build-args: "REPOSITORY=${{ github.repository_owner }},QUARTUS_VERSION=${{ env.QUARTUS_VERSION }},QUARTUS_PATCH=${{ env.QUARTUS_PATCH }},QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}"
+          build-args: |
+            REPOSITORY=${{ github.repository_owner }}
+            QUARTUS_VERSION=${{ env.QUARTUS_VERSION }}
+            QUARTUS_PATCH=${{ env.QUARTUS_PATCH }}
+            QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}
           file: ${{ matrix.DEVICE }}.dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
