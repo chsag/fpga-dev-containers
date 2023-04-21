@@ -111,7 +111,7 @@ jobs:
             QUARTUS_VERSION=${{ env.QUARTUS_VERSION }}
             QUARTUS_PATCH=${{ env.QUARTUS_PATCH }}
             QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}
-          file: quartus.dockerfile
+          file: ./intel/quartus.dockerfile
           push: true
           tags: "${{ env.REGISTRY }}/${{ github.repository_owner }}/quartus:latest,${{ env.REGISTRY }}/${{ github.repository_owner }}/quartus:${{ env.QUARTUS_VERSION }}"
 
@@ -153,7 +153,7 @@ jobs:
             QUARTUS_VERSION=${{ env.QUARTUS_VERSION }}
             QUARTUS_PATCH=${{ env.QUARTUS_PATCH }}
             QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}
-          file: ${{ matrix.DEVICE }}.dockerfile
+          file: ./intel/${{ matrix.DEVICE }}.dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
