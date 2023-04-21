@@ -22,11 +22,11 @@ RUN /usr/local/lib/ghdl/vendors/compile-intel.sh \
     --output /usr/local/lib/ghdl/vendors/intel
 
 # Install BSDL File Generation Tools
-RUN mkdir /tmp/bsdl_generator \
-    && cd /tmp/bsdl_generator \
-    && mkdir /opt/bsdl_generator \
-    && curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/C10/C10_postconfig.zip \
-    && unzip C10_postconfig.zip \
-    && mv C10.tcl /opt/bsdl_generator/bsdl_generator.tcl \
-    && chmod +x /opt/bsdl_generator/bsdl_generator.tcl \
-    && rm -rf /tmp/bsdl_generator
+# RUN mkdir /tmp/bsdl_generator \
+#     && cd /tmp/bsdl_generator \
+#     && mkdir /opt/bsdl_generator \
+#     && curl --location --silent --remote-name https://www.intel.com/content/dam/altera-www/global/en_US/others/support/devices/bsdl/C10/C10_postconfig.zip \
+#     && unzip C10_postconfig.zip \
+#     && mv C10.tcl /opt/bsdl_generator/bsdl_generator.tcl \
+#     && chmod +x /opt/bsdl_generator/bsdl_generator.tcl \
+#     && rm -rf /tmp/bsdl_generator
