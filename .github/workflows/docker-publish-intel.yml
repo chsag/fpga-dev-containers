@@ -86,7 +86,7 @@ jobs:
             VUNIT_VERSION=${{ env.VUNIT_VERSION }}
           file: vunit.dockerfile
           push: true
-          tags: "${{ env.REGISTRY }}/${{ github.repository_owner }}vunit:latest,${{ env.REGISTRY }}/${{ github.repository_owner }}/vunit:${{ env.VUNIT_VERSION }}"
+          tags: "${{ env.REGISTRY }}/${{ github.repository_owner }}/vunit:latest,${{ env.REGISTRY }}/${{ github.repository_owner }}/vunit:${{ env.VUNIT_VERSION }}"
 
   quartus:
     needs: vunit
