@@ -40,6 +40,8 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v2
+        env:
+          FPGA: ${{ matrix.fpga }}
         with:
           context: .
           file: intel.dockerfile
