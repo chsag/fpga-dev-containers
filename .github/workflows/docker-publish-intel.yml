@@ -57,7 +57,7 @@ jobs:
         with:
           context: .
           build-args: |
-            REPOSITORY=${{ github.repository_owner }}
+            REPOSITORY=${{ env.REGISTRY }}/${{ github.repository_owner }}
             GHDL_VERSION=${{ env.GHDL_VERSION }}
           file: ghdl.dockerfile
           push: true
@@ -82,7 +82,7 @@ jobs:
         with:
           context: .
           build-args: |
-            REPOSITORY=${{ github.repository_owner }}
+            REPOSITORY=${{ env.REGISTRY }}/${{ github.repository_owner }}
             VUNIT_VERSION=${{ env.VUNIT_VERSION }}
           file: vunit.dockerfile
           push: true
@@ -107,7 +107,7 @@ jobs:
         with:
           context: ./intel
           build-args: |
-            REPOSITORY=${{ github.repository_owner }}
+            REPOSITORY=${{ env.REGISTRY }}/${{ github.repository_owner }}
             QUARTUS_VERSION=${{ env.QUARTUS_VERSION }}
             QUARTUS_PATCH=${{ env.QUARTUS_PATCH }}
             QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}
@@ -149,7 +149,7 @@ jobs:
         with:
           context: .
           build-args: |
-            REPOSITORY=${{ github.repository_owner }}
+            REPOSITORY=${{ env.REGISTRY }}/${{ github.repository_owner }}
             QUARTUS_VERSION=${{ env.QUARTUS_VERSION }}
             QUARTUS_PATCH=${{ env.QUARTUS_PATCH }}
             QUARTUS_BUILD=${{ env.QUARTUS_BUILD }}
