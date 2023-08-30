@@ -9,7 +9,7 @@ ARG QUARTUS_BUILD
 RUN mkdir /tmp/quartus \
     && cd /tmp/quartus \
     && curl --location --progress-bar --remote-name \
-        https://download.altera.com/akdlm/software/acdsinst/${QUARTUS_VERSION}std.${QUARTUS_PATCH}/${QUARTUS_BUILD}/ib_installers/QuartusLiteSetup-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}-linux.run \
+        https://download.intel.com/akdlm/software/acdsinst/${QUARTUS_VERSION}std.${QUARTUS_PATCH}/${QUARTUS_BUILD}/ib_installers/QuartusLiteSetup-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}-linux.run \
     && chmod +x QuartusLiteSetup-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}-linux.run \
     && ./QuartusLiteSetup-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}-linux.run \
         --mode unattended \

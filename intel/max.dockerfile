@@ -9,7 +9,7 @@ ARG QUARTUS_BUILD
 RUN mkdir /tmp/device \
     && cd /tmp/device \
     && curl --location --progress-bar --remote-name \
-        https://download.altera.com/akdlm/software/acdsinst/${QUARTUS_VERSION}std.${QUARTUS_PATCH}/${QUARTUS_BUILD}/ib_installers/max-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}.qdz \
+        https://download.intel.com/akdlm/software/acdsinst/${QUARTUS_VERSION}std.${QUARTUS_PATCH}/${QUARTUS_BUILD}/ib_installers/max-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}.qdz \
     && unzip max-${QUARTUS_VERSION}.${QUARTUS_PATCH}.${QUARTUS_BUILD}.qdz \
     && mv ./quartus/common/devinfo/maxii /opt/intelFPGA_lite/${QUARTUS_VERSION}/quartus/common/devinfo/maxii \
     && mv ./quartus/common/devinfo/maxv /opt/intelFPGA_lite/${QUARTUS_VERSION}/quartus/common/devinfo/maxv \
